@@ -10,10 +10,11 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    public static function generateSlug($name){
+    public static function generateSlug($name)
+    {
         return Str::slug($name, '-');
     }
-  
+
     public function typologies()
     {
         return $this->belongsToMany(Typology::class);
@@ -22,5 +23,14 @@ class Doctor extends Model
     public function stars()
     {
         return $this->belongsToMany(Star::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
