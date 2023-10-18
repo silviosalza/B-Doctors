@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->on('doctors')->references('id')->onDelete('cascade');
             $table->string('name_ui', 30);
             $table->string('lastname_ui', 30);
             $table->string('email_ui', 50);
-            $table->text('text', 500); 
+            $table->text('text', 500);
             $table->timestamps();
         });
     }
