@@ -15,6 +15,10 @@ class Doctor extends Model
         return Str::slug($name, '-');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function typologies()
     {
         return $this->belongsToMany(Typology::class);
