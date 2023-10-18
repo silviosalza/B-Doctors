@@ -13,4 +13,14 @@ class Doctor extends Model
     public static function generateSlug($name){
         return Str::slug($name, '-');
     }
+  
+    public function typologies()
+    {
+        return $this->belongsToMany(Typology::class);
+    }
+
+    public function stars()
+    {
+        return $this->belongsToMany(Star::class);
+    }
 }
