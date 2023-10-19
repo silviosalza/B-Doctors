@@ -16,9 +16,10 @@ class DoctorSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        foreach (range(1, 10) as $index) {
+        $doctorsCount = 20;
+        for ($i = 1; $i <= $doctorsCount; $i++) {
             $newDoctor = new Doctor();
-            $newDoctor->user_id = 1;
+            $newDoctor->user_id = $i;
             $newDoctor->address = $faker->address;
             $newDoctor->description = $faker->text;
             $newDoctor->services = $faker->words(3, true);
