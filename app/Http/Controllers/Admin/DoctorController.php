@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -12,9 +14,17 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = Auth::user();
+        $data = $request->all();
+        $typologies = Typology::all();
+        $doctors = Doctor::where("user_id", Auth::user()->id)->get();
+
+        return view ('admin.doctors.index' , compact('doctors', 'typologies' , 'users'));
+
+
+
     }
 
     /**
@@ -24,7 +34,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $typologies = Typology::all();
+        return view('admin.doctors.create' , compact('typologies'));
     }
 
     /**
@@ -35,7 +46,10 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $data = $request->all();
+        // $doctor = new Doctor();
+        // $doctor = Doctor::create($data);
+
     }
 
     /**
