@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Typology;
@@ -16,13 +17,13 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        $users = Auth::user();
+        $user = Auth::user();
         $data = $request->all();
         $doctor = Doctor::with('typologies')->find(Auth::user()->id);
-        return view ('admin.doctors.index' , compact('doctor' , 'users'));
-
-
-
+        if ($doctor) {
+            return view('admin.doctors.index', compact('doctor', 'user'));
+        } else {
+        }
     }
 
     /**
@@ -33,7 +34,7 @@ class DoctorController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-        return view('admin.doctors.create' , compact('typologies'));
+        return view('admin.doctors.create', compact('typologies'));
     }
 
     /**
