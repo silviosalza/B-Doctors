@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DoctorSeeder::class,
             TypologySeeder::class,
-            DoctorTypologySeeder::class
+            DoctorTypologySeeder::class,
+            StarSeeder::class,
+            DoctorStarSeeder::class
         ]);
     }
 }
