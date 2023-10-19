@@ -18,10 +18,8 @@ class DoctorController extends Controller
     {
         $users = Auth::user();
         $data = $request->all();
-        $typologies = Typology::all();
-        $doctors = Doctor::where("user_id", Auth::user()->id)->get();
-
-        return view ('admin.doctors.index' , compact('doctors', 'typologies' , 'users'));
+        $doctor = Doctor::with('typologies')->find(Auth::user()->id);
+        return view ('admin.doctors.index' , compact('doctor' , 'users'));
 
 
 

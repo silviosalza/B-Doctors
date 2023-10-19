@@ -1,27 +1,28 @@
 
 @section('content')
 
-<table class="table">
+<table class="table-secondary">
     <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Nome</th>
-            <th scope="col">Specializzazione</th>
             <th scope="col">Indirizzo</th>
             <th scope="col">Descrizione</th>
+            <th scope="col">Specializzazione</th>
             <th scope="col">Servizi</th>
             <th scope="col">Foto</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($doctors as $doctor)
+       
         <tr>
-            <th scope="row">{{ $doctor->id }}</th>
-            <td>{{ $doctor->address }}</td>
+            <th scope="row">{{ $users->name }}</th>
+            <td>{{ $users->address }}</td>
             <td>{{ $doctor->description }}</td>
+            @foreach ($doctor->typologies as $typology)
+            <td>{{ $typology->name }}</td>
+            @endforeach
             <td>{{ $doctor->services }}</td>
             <td>{{ $doctor->photo }}</td>
         </tr>
-        @endforeach
     </tbody>
 </table>
