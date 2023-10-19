@@ -26,7 +26,6 @@ class DoctorSeeder extends Seeder
             $newDoctor->photo = $faker->imageUrl();
             $newDoctor->visible = $faker->boolean;
             $newDoctor->slug = Doctor::generateSlug($faker->name); // Assicurati che il modello Doctor abbia un metodo generateSlug
-
             $newDoctor->save();
         }
     }
