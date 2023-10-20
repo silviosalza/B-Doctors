@@ -11,7 +11,7 @@
                             name="address">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Specializzazione</label>
+                        <label for="exampleInputPassword1" class="form-label">Descrizione</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="description">
                     </div>
                     <div class="mb-3">
@@ -32,6 +32,20 @@
                                 Visibilità
                             </label>
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Specializzazione/i</h6>
+                        @foreach ($typologies as $typology)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
+                                    name="typologies[]">
+
+                                <label class="form-check-label" for="disabledFieldsetCheck">
+                                    {{ $typology->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
