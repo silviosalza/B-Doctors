@@ -27,7 +27,7 @@
                             <a class="btn btn-success bg-gradient" href="{{ route('admin.doctors.show', $doctor) }}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
-                            <a class="btn btn-primary" href="">
+                            <a class="btn btn-primary" href="{{ route('admin.doctors.edit', $doctor) }}">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
                             <form class="m-0 p-0 d-inline-block" action="" method="POST">

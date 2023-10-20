@@ -72,7 +72,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        return view('admin.doctors.edit', compact('doctor'));
     }
 
     /**
