@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $doctor = Doctor::with('typologies')->find(Auth::user()->id);
         if ($doctor) {
-            return view('admin.doctors.index', compact('doctor', 'user'));
+            return view('admin.dashboard', compact('doctor', 'user'));
         } else {
         }
     }

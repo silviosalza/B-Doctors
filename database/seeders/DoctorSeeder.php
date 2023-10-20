@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Doctor;
+use App\Models\User;
 
 class DoctorSeeder extends Seeder
 {
@@ -25,7 +26,8 @@ class DoctorSeeder extends Seeder
             $newDoctor->services = $faker->words(3, true);
             $newDoctor->photo = $faker->imageUrl();
             $newDoctor->visible = $faker->boolean;
-            $newDoctor->slug = Doctor::generateSlug($faker->name); // Assicurati che il modello Doctor abbia un metodo generateSlug
+            $doctors_name = User::find($i);
+            $newDoctor->slug = Doctor::generateSlug($doctors_name->name); // Assicurati che il modello Doctor abbia un metodo generateSlug
             $newDoctor->save();
         }
     }
