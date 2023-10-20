@@ -13,7 +13,7 @@ class DoctorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index(Request $request)
     {
@@ -29,7 +29,7 @@ class DoctorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
@@ -41,7 +41,7 @@ class DoctorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *
      */
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class DoctorController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     *
      */
     public function show(Doctor $doctor)
     {
@@ -66,7 +66,7 @@ class DoctorController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(Doctor $doctor)
     {
