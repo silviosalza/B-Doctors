@@ -4,7 +4,7 @@
     <div class="container">
         <div class="title d-flex justify-content-between align-items-center">
             <h2>{{ $user->name }}</h2>
-            <span class="badge text-bg-primary">Crea il tuo profilo</span>
+
         </div>
         <table class="table table-striped">
             <thead>

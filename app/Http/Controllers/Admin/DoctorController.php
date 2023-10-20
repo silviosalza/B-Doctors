@@ -18,7 +18,7 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $data = $request->all();
+
         $doctor = Doctor::with('typologies')->find(Auth::user()->id);
         if ($doctor) {
             return view('admin.doctors.index', compact('doctor', 'user'));
@@ -59,7 +59,9 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        //
+        $user = Auth::user();
+
+        return view('admin.doctors.show', compact('doctor', 'user'));
     }
 
     /**
