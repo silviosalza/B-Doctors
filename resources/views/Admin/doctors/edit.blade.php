@@ -41,8 +41,16 @@
                         <label for="exampleInputTypologies" class="form-label">Specializzazione</label>
                         @foreach ($typologies as $typology)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
-                                    name="typologies[]">
+                                @if ($errors->any())
+                                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
+                                        name="typologies[]" value="{{ $typology->id }}"
+                                        {{ in_array($typology->id, old('typologies', [])) ? 'checked' : '' }}>
+                                @else
+                                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
+                                        name="typologies[]" value="{{ $typology->id }}"
+                                        {{ $doctor->typologies->contains($typology) ? 'checked' : '' }}>
+                                @endif
+
 
                                 <label class="form-check-label" for="disabledFieldsetCheck">
                                     {{ $typology->name }}
