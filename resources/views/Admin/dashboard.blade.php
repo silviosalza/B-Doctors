@@ -8,23 +8,26 @@
         </div>
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="align-middle text-center">
                     <th scope="col">Nome</th>
                     <th scope="col">Specializzazione</th>
                     <th scope="col">Azioni</th>
                 </tr>
             </thead>
             <tbody>
-
-                <tr>
-                    <th scope="row">{{ $user->name }}</th>
-                    @foreach ($doctor->typologies as $typology)
-                        <td>{{ $typology->name }}</td>
-                    @endforeach
+                <tr class="align-middle text-center">
+                    <td scope="row">{{ $user->name }}</td>
+                    <td>
+                        @foreach ($doctor->typologies as $typology)
+                            <p>
+                                {{ $typology->name }}
+                            </p>
+                        @endforeach
+                    </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap justify-content-center text-center align-items-center">
 
-                            <a class="btn btn-success bg-gradient" href="{{ route('admin.doctors.show', $doctor) }}">
+                            <a class="btn btn-success bg-gradient" href="{{ route('admin.doctors.show', $doctor->slug) }}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                             <a class="btn btn-primary" href="{{ route('admin.doctors.edit', $doctor) }}">
@@ -41,7 +44,6 @@
                         </div>
                     </td>
                 </tr>
-
             </tbody>
         </table>
     </div>
