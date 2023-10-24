@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
@@ -17,13 +18,10 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $doctor = Doctor::with('typologies')->find(Auth::user()->id);
-        if ($doctor) {
-            return view('admin.doctors.index', compact('doctor', 'user'));
-        } else {
-        }
+        // $doctor = Doctor::with('typologies')->find(Auth::user()->id);
+        // return view('admin.doctors.index', compact('doctor', 'user'));
     }
 
     /**
@@ -45,10 +43,17 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        // $doctor = new Doctor();
-        // $doctor = Doctor::create($data);
+        $data = $request->all();
 
+        $id = Auth::id();
+        $doctor = new Doctor;
+        $doctor->fill($data);
+        $doctor->user_id = $id;
+        $doctor->save();
+
+        if (Arr::exists($data, 'typologies')) $doctor->typologies()->attach($data['typologies']);
+
+        return redirect()->route('admin.doctors.show', $doctor);
     }
 
     /**
@@ -96,6 +101,7 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+        return to_route('admin.dashboard');
     }
 }
