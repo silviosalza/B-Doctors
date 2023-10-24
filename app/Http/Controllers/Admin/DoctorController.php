@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -44,7 +45,7 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $this->validation($request->all());
 
         $user = Auth::user();
 
@@ -95,7 +96,13 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor)
     {
-        //
+        $data = $this->validation($request->all());
+
+        if (Arr::exists($data, 'typologies')) $doctor->typologies()->sync($data['typologies']);
+        else $doctor->typologies()->detach();
+
+        $doctor->update($data);
+        return redirect()->route('admin.doctors.show', $doctor);
     }
 
     /**
@@ -108,5 +115,38 @@ class DoctorController extends Controller
     {
         $doctor->delete();
         return to_route('admin.dashboard');
+    }
+
+    //VALIDATION
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'address' => 'required|string|max:255',
+                'description' => 'required|string|max:500',
+                'services' => 'required|string|max:500',
+                'photo' => 'nullable',
+                'visible' => 'required|boolean',
+                'typologies' => 'required'
+            ],
+            [
+                'address.required' => 'L\'idirizzo è obbligatorio',
+                'address.string' => 'L\'idirizzo deve essere una stringa',
+                'address.max' => 'L\'idirizzo deve avere massimo 255 caratteri',
+
+                'description.required' => 'La descrizione è obbligatoria',
+                'description.string' => 'La descrizione deve essere una stringa',
+                'description.max' => 'La descrizione deve avere massimo 500 caratteri',
+
+                'services.required' => 'I servizi da proporre sono obbligatori',
+                'services.string' => 'Il campo "servizi" deve essere una stringa',
+                'services.max' => 'Il campo "servizi" deve avere massimo 500 caratteri',
+
+                'typologies.required' => 'La specializzazione è obbligatoria'
+
+            ]
+        )->validate();
+        return $validator;
     }
 }
