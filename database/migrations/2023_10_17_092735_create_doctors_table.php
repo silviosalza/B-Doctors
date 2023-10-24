@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('address', 255);
             $table->text('description', 500);
             $table->text('services', 500);
-            $table->text('photo' , 255)->nullable();
-            $table->tinyInteger('visible');
+            $table->text('photo', 255)->nullable();
+            $table->boolean('visible')->default(true);
             $table->string('slug', 30)->unique();
             $table->timestamps();
         });

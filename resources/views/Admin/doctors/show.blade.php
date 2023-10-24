@@ -23,9 +23,11 @@
                     <th scope="row">{{ $user->name }}</th>
                     <td>{{ $doctor->address }}</td>
                     <td>{{ $doctor->description }}</td>
-                    @foreach ($doctor->typologies as $typology)
-                        <td>{{ $typology->name }}</td>
-                    @endforeach
+                    <td>
+                        @foreach ($doctor->typologies as $typology)
+                            {{ $typology->name }},
+                        @endforeach
+                    </td>
                     <td>{{ $doctor->services }}</td>
                     <td>{{ $doctor->photo }}</td>
                 </tr>

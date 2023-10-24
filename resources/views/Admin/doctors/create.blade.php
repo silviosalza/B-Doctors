@@ -28,33 +28,39 @@
                             name="services">
                     </div>
                     <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" name="visible">
-                            <label class="form-check-label" for="disabledFieldsetCheck">
-                                Visibilità
-                            </label>
+                        <h6>Visibile</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="visible" id="visible-true" value="1"
+                                required>
+                            <label class="visible-true" for="inlineRadio1">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="visible" id="visible-false" value="0"
+                                required>
+                            <label class="form-check-label" for="visible-false">No</label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputTypologies" class="form-label">Specializzazione</label>
-                        @foreach ($typologies as $typology)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
-                                    name="typologies[]">
-                                <label class="form-check-label" for="disabledFieldsetCheck">
-                                    {{ $typology->name }}
-                                </label>
-                            </div>
-                        @endforeach
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputTypologies" class="form-label">Specializzazione</label>
+                    @foreach ($typologies as $typology)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" name="typologies[]"
+                                value="{{ $typology->id }}">
+                            <label class="form-check-label" for="disabledFieldsetCheck">
+                                {{ $typology->name }}
+                            </label>
+                        </div>
+                    @endforeach
 
-                    </div>
                 </div>
             </div>
+    </div>
 
 
-            <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
-                <button class="btn btn-primary ms-2" type="submit">Salva</button>
-            </div>
-        </form>
+    <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
+        <button class="btn btn-primary ms-2" type="submit">Salva</button>
+    </div>
+    </form>
     </div>
 @endsection

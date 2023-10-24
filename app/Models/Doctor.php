@@ -10,7 +10,9 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['address', 'description', 'visible', 'photo', 'services', 'typologies'];
+    protected $fillable = ['address', 'description', 'visible', 'photo', 'services'];
+
+    protected $with = ['typologies'];
 
     public static function generateSlug($name)
     {

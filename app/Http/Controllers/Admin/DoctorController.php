@@ -8,6 +8,7 @@ use App\Models\Typology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DoctorController extends Controller
 {
@@ -45,10 +46,14 @@ class DoctorController extends Controller
     {
         $data = $request->all();
 
+        $user = Auth::user();
+
         $id = Auth::id();
         $doctor = new Doctor;
         $doctor->fill($data);
+        $doctor->id = $id;
         $doctor->user_id = $id;
+        $doctor->slug = Str::slug($user->name, '-');
         $doctor->save();
 
         if (Arr::exists($data, 'typologies')) $doctor->typologies()->attach($data['typologies']);
