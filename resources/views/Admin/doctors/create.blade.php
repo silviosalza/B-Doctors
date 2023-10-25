@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <a class="btn btn-primary ms-4 my-4" href="{{ route('admin.dashboard') }}">Indietro</a>
+    <div class="container card p-4">
         <form method="POST" action="{{ route('admin.doctors.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -76,12 +77,12 @@
 
                 </div>
             </div>
+            <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
+                <button class="btn btn-primary ms-2" type="submit">Salva</button>
+            </div>
     </div>
 
 
-    <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
-        <button class="btn btn-primary ms-2" type="submit">Salva</button>
-    </div>
     </form>
     </div>
 @endsection

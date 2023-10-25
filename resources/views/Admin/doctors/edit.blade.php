@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <a class="btn btn-primary ms-4 my-4" href="{{ route('admin.dashboard') }}">Indietro</a>
+    <div class="container card p-4">
         <form method="POST" action="{{ route('admin.doctors.update', $doctor) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
