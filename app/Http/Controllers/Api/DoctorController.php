@@ -6,14 +6,35 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Typology;
-use App\Models\User;
 
 class DoctorController extends Controller
 {
-    public function index(){
-        $doctors = Doctor::with('user')->get();
+    public function index(Request $request){
+
+        $requestData = $request->all();
 
         $typologies = Typology::all();
+
+        if($request->has('typology_id') && $requestData['typology_id']){
+
+            $doctors = Doctor::with('user')
+            ->select('doctors.*')
+            ->join('doctor_typology', 'doctors.id', '=', 'doctor_typology.doctor_id')
+            ->join('typologies', 'doctor_typology.typology_id', '=', 'typologies.id')
+            ->whereIn('typologies.id', $requestData['typology_id'] )
+            ->get();
+
+            if(count($doctors) == 0) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'A questa tipologia non corrisponde nessun ristorante',
+                ]);
+            }
+        }else{
+
+            $doctors = Doctor::with('user')->get();
+            
+        }
         return response()->json([
             'success' => true,
             'results' => $doctors,
