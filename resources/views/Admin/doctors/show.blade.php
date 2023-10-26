@@ -13,8 +13,9 @@
                 </p>
                 <p class="card-subtitle mb-2 my-2"><strong> Specializzazione:</strong></p>
                 <ul>
-                    @foreach ($doctor->typologies as $typology)
-                        <li>{{ $typology->name }}</li>
+                    @foreach ($doctor['typologies'] as $index => $element)
+                        <span
+                            class="card-text">{{ $element['name'] }}{{ $index !== count($doctor['typologies']) - 1 ? ',' : '' }}</span>
                     @endforeach
                 </ul>
                 <p class="card-subtitle mb-2 my-2"><strong> Servizi:</strong> {{ $doctor->services }}</p>
