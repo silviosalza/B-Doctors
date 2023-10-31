@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use App\Models\Star;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class DoctorStarSeeder extends Seeder
 {
@@ -14,12 +15,12 @@ class DoctorStarSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $doctors = Doctor::all();
         $stars = Star::all();
-
-        foreach ($doctors as $doctor) {
+        
+        for ($i = 1; $i <= 50; $i++) {
+            $doctor = Doctor::find($faker->numberBetween(1, 20));
             $selectedStar = $stars->random();
             $doctor->stars()->attach($selectedStar);
         }
