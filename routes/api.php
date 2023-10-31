@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DoctorController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\StarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,8 @@ use App\Http\Controllers\Api\DoctorController;
 */
 Route::get('/doctors', [DoctorController::class, 'index']);
 Route::get('/doctors/{slug}', [DoctorController::class, 'show']);
+Route::get('/review', [ReviewController::class, 'index']);
+Route::get('/star', [StarController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
