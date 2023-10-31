@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DoctorController extends Controller
@@ -46,6 +47,11 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $data = $this->validation($request->all());
+
+        if (Arr::exists($data, 'photo')) {
+            $path = Storage::put('uploads/doctors', $data['photo']);
+            $data['photo'] = $path;
+        };
 
         $user = Auth::user();
 
@@ -98,6 +104,13 @@ class DoctorController extends Controller
     {
         $data = $this->validation($request->all());
 
+        if (Arr::exists($data, 'photo')) {
+            if ($doctor->photo) Storage::delete($doctor->photo);
+
+            $path = Storage::put('uploads/doctors', $data['photo']);
+            $data['photo'] = $path;
+        };
+
         if (Arr::exists($data, 'typologies')) $doctor->typologies()->sync($data['typologies']);
         else $doctor->typologies()->detach();
 
@@ -113,6 +126,7 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
+        if ($doctor->photo) Storage::delete($doctor->photo);
         $doctor->delete();
         return to_route('admin.dashboard');
     }
@@ -126,7 +140,7 @@ class DoctorController extends Controller
                 'address' => 'required|string|max:255',
                 'description' => 'required|string|max:500',
                 'services' => 'required|string|max:500',
-                'photo' => 'nullable',
+                'photo' => 'nullable|image|mimes:jpg,png,jpeg',
                 'visible' => 'required|boolean',
                 'typologies' => 'required'
             ],
@@ -143,7 +157,10 @@ class DoctorController extends Controller
                 'services.string' => 'Il campo "servizi" deve essere una stringa',
                 'services.max' => 'Il campo "servizi" deve avere massimo 500 caratteri',
 
-                'typologies.required' => 'La specializzazione è obbligatoria'
+                'typologies.required' => 'La specializzazione è obbligatoria',
+
+                'photo.image' => 'Perfavore inserisci un file',
+                'photo.mimes' => 'I formati accettati sono: jpg, png o jpeg',
 
             ]
         )->validate();

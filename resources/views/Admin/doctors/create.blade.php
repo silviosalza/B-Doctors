@@ -29,7 +29,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPhoto" class="form-label">Foto</label>
-                        <input type="text" class="@error('photo') is-invalid @enderror form-control"
+                        <input type="file" class="@error('photo') is-invalid @enderror form-control"
                             id="exampleInputPhoto" name="photo">
                         @error('photo')
                             <div class="invalid-feedback">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-6">
                     <div class="mb-3">
-                        <label for="exampleInputService" class="form-label">Servizio</label>
+                        <label for="exampleInputService" class="form-label">Prestazioni</label>
                         <input type="text" class="@error('services') is-invalid @enderror form-control"
                             id="exampleInputService" aria-describedby="emailHelp" name="services">
                         @error('services')
@@ -74,6 +74,7 @@
                             </label>
                         </div>
                     @endforeach
+
 
                 </div>
             </div>

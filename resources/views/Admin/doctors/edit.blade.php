@@ -31,13 +31,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPhoto" class="form-label">Foto</label>
-                        <input type="text" class="@error('photo') is-invalid @enderror form-control"
+                        <input type="file" class="@error('photo') is-invalid @enderror form-control"
                             id="exampleInputPhoto" name="photo" value="{{ old('photo', $doctor->photo) }}">
                         @error('photo')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
+                    </div>
+                    <div class="col-3">
+                        <img class="img-fluid" src="{{ $doctor->getPhotoUri() }}" id="image_preview">
                     </div>
                 </div>
                 <div class="col-6">
